@@ -9,7 +9,7 @@ import os, sys
 import requests
 from io import BytesIO
 
-def load_image( filename ) :
+def load_image(filename) :
     try:
         myimage = Image.open(filename)
         myimage.load()
@@ -18,17 +18,37 @@ def load_image( filename ) :
         print("Image load failed")
         return None
 
-def save_image( imageObject, outfilename ) :
+def save_image(imageObject, outfilename) :
     """
     Save an image to disk
     :param imageObject: The Image to save
     :param outfilename: The target file
     """
     try:
-        imageObject.save( outfilename )
+        imageObject.save(outfilename)
     except:
         print(".save() failed")
         
 def crop_img(img, crop_size=(200,300,400,500)):   # an image object and a tuple  
     im = img.crop(crop_size) # (left, top, right, bottom) it's a tuple!
     return im
+
+def write_text_to_image(imageFile, text):
+    """
+    Write text onto an existing image. The result is written to sample-out.jpg
+    :param imageFile: The image file name
+    :param text: The text to write onto the image
+    """
+    #**************************************************
+    #* Add text to an image
+    #* https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html
+    #* https://stackoverflow.com/questions/16373425/add-text-on-image-using-pil
+    #* Free fonts: https://www.fontsquirrel.com/fonts/list/classification/sans%20serif
+    #**************************************************
+    myImage = load_image(imageFile);
+    draw = ImageDraw.Draw(myImage)
+    # https://stackoverflow.com/questions/47694421/pil-issue-oserror-cannot-open-resource
+    #fontStyle = ImageFont.truetype("Aaargh.ttf", 48)     # font must be in the same folder as the .py file. 
+    draw.text((30, 20), text, (0,255,0))    # Write in black ,font=fontStyle
+    
+    myImage.save("sample-out.jpg")
