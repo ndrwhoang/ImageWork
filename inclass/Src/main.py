@@ -16,5 +16,5 @@ my_image = load_image("SiriusAndViolet.jpg")
 my_crop_image = crop_img(my_image)
 my_crop_image.show(my_crop_image)
 '''
-print('123')
+
 my_image = write_text_to_image("SiriusAndViolet.jpg", "grreargrga")
