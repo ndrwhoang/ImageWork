@@ -50,6 +50,8 @@ def write_text_to_image(imageFile, text):
     draw = ImageDraw.Draw(myImage)
     # https://stackoverflow.com/questions/47694421/pil-issue-oserror-cannot-open-resource
     fontStyle = ImageFont.truetype("Aaargh.ttf", 48)     # font must be in the same folder as the .py file. 
+    for i in range(0, 10):
+        draw.ellipse([(300, 300), (i+randint(0,800),i+randint(0,800))], outline="green", fill="white")
     x = randint(0, myImage.width-len(text)*30)
     y = randint(0, myImage.height-len(text)*10)
     x_1 = x+randint(30, 50)
